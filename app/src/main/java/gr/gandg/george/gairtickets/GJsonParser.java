@@ -1,6 +1,10 @@
 package gr.gandg.george.gairtickets;
 
+import android.content.ContentValues;
+import android.util.Log;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -17,7 +21,7 @@ public class GJsonParser {
 
     public void Process() {
         try {
-            JSONObject resultsJson = new JSONObject();
+            JSONObject resultsJson = new JSONObject(JsonStr);
 
             JSONArray resultsArray = resultsJson.getJSONArray(OWM_LIST);
 

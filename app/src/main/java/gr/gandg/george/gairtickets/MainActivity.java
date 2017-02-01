@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void main_from() {
-        Properties properties = new Properties();
+/*        Properties properties = new Properties();
 
         String amadeusKey;
         String iataCodesKey;
@@ -39,6 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         AirportParser airport = new AirportParser(amadeusKey);
         System.out.println(airport.search("the"));
-
+*/
     }
 }

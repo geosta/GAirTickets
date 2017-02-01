@@ -14,4 +14,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    private void main_from() {
+        Properties properties = new Properties();
+
+        String amadeusKey;
+        String iataCodesKey;
+
+        FileInputStream is;
+        try {
+            is = new FileInputStream("GAirTickets.ini");
+            properties.load(is);
+            is.close();
+        }
+        catch (IOException e) {
+        }
+
+        amadeusKey = properties.getProperty("amadeusKey");
+        iataCodesKey = properties.getProperty("iataCodesKey");
+
+
+        AirlineParser airline = new AirlineParser(iataCodesKey);
+        System.out.println(airline.search("OA"));
+
+        AirportParser airport = new AirportParser(amadeusKey);
+        System.out.println(airport.search("the"));
+
+    }
 }

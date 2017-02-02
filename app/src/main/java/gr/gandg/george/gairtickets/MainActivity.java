@@ -11,6 +11,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String amadeusKey;
+        String iataCodesKey;
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }

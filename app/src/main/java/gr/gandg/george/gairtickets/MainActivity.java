@@ -2,6 +2,7 @@ package gr.gandg.george.gairtickets;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 /**
  * UOM Mobile Development 2017 project
@@ -11,14 +12,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TextView mainTextView =  (TextView)findViewById(R.id.main_textview);
         String amadeusKey;
         String iataCodesKey;
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         amadeusKey = BuildConfig.AMADEUS_API_KEY;
         iataCodesKey = BuildConfig.IATA_CODES_API_KEY;
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        AirlineParser airline = new AirlineParser(getApplicationContext(), iataCodesKey);
+        AirportParser airport = new AirportParser(amadeusKey);
+
+        mainTextView.setText("Airline:\n" +  airline.execute("OA") + "\nAirport:\n" + airport.search("the"));
+
     }
 
     private void main_from() {

@@ -1,5 +1,11 @@
 package gr.gandg.george.gairtickets;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.view.LayoutInflater;
+import android.widget.TextView;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,28 +14,32 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by george on 1/2/2017.
  */
 
-public class AirlineParser {
+public class AirlineParser extends AsyncTask<String, Void, Void> {
 
     public final String LOG_TAG = "AirlineParser";
     public String airlineSearchString = null;
     private String API_KEY = null;
 
-    AirlineParser(String _apiKey) {
+    private final Context mContext;
+
+    AirlineParser(Context _context, String _apiKey) {
+        mContext = _context;
         API_KEY = _apiKey;
     }
 
 
 
-    public String search(String _airlineSearchString) {
-        airlineSearchString = _airlineSearchString;
-        return search();
-    }
 
-    public String search() {
+    @Override
+    protected Void doInBackground(String... params) {
+        airlineSearchString = params[0];
+
         if (airlineSearchString == null) {
             return null;
         }
@@ -75,6 +85,7 @@ public class AirlineParser {
             }
             airportJsonStr = buffer.toString();
 
+            TextView mainTextView =  (TextView)(mContext).findViewById(R.id.main_textview);
 
 
         } catch (IOException e) {
@@ -96,6 +107,8 @@ public class AirlineParser {
             }
         }
 
-        return airportJsonStr;
+        return null;
     }
+
+
 }

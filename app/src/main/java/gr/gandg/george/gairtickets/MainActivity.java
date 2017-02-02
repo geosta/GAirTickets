@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
         String amadeusKey;
         String iataCodesKey;
 
+        amadeusKey = BuildConfig.AMADEUS_API_KEY;
+        iataCodesKey = BuildConfig.IATA_CODES_API_KEY;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

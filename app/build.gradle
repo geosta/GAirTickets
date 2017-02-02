@@ -20,7 +20,7 @@ android {
 
     buildTypes.each {
         it.buildConfigField 'String', 'AMADEUS_API_KEY', amadeusKey
-        it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY', iataCodesKey
+        it.buildConfigField 'String', 'IATA_CODES_API_KEY', iataCodesKey
     }
 }
 

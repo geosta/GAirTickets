@@ -26,10 +26,10 @@ public class AirlineParser extends AsyncTask<String, Void, Void> {
     public String airlineSearchString = null;
     private String API_KEY = null;
 
-    private final Context mContext;
+    private final TextView theTextView;
 
-    AirlineParser(Context _context, String _apiKey) {
-        mContext = _context;
+    AirlineParser(TextView _textView, String _apiKey) {
+        theTextView = _textView;
         API_KEY = _apiKey;
     }
 
@@ -85,7 +85,7 @@ public class AirlineParser extends AsyncTask<String, Void, Void> {
             }
             airportJsonStr = buffer.toString();
 
-            TextView mainTextView =  (TextView)(mContext).findViewById(R.id.main_textview);
+            theTextView.setText(theTextView.getText() + "\n" + airportJsonStr);
 
 
         } catch (IOException e) {

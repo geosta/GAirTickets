@@ -12,20 +12,29 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TextView mainTextView =  (TextView)findViewById(R.id.main_textview);
-        String amadeusKey;
-        String iataCodesKey;
+//        TextView mainTextView =  (TextView)findViewById(R.id.main_textview);
+//        String amadeusKey;
+//        String iataCodesKey;
+//
+//        amadeusKey = BuildConfig.AMADEUS_API_KEY;
+//        iataCodesKey = BuildConfig.IATA_CODES_API_KEY;
+//
+//        AirlineParser airline = new AirlineParser(getApplicationContext(), iataCodesKey);
+//        AirportParser airport = new AirportParser(amadeusKey);
+//
+//        mainTextView.setText("Airline:\n" +  airline.execute("OA") + "\nAirport:\n" + airport.search("the"));
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        amadeusKey = BuildConfig.AMADEUS_API_KEY;
-        iataCodesKey = BuildConfig.IATA_CODES_API_KEY;
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new AirlineFragment())
+                    .commit();
+        }
 
-        AirlineParser airline = new AirlineParser(getApplicationContext(), iataCodesKey);
-        AirportParser airport = new AirportParser(amadeusKey);
 
-        mainTextView.setText("Airline:\n" +  airline.execute("OA") + "\nAirport:\n" + airport.search("the"));
 
     }
 

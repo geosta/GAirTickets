@@ -8,32 +8,15 @@
     tools:context="gr.gandg.george.gairtickets.MainActivity">
 
     <AutoCompleteTextView
-        android:text="Departure"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="461dp"
         android:id="@+id/autocomplete_from_airport" />
 
 
     <AutoCompleteTextView
-        android:text="Arival"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="461dp"
-        android:id="@+id/autocomplete_to_airport" />
-
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/editText" />
+        android:id="@+id/autocomplete_to_airport" />
 
 
     <TextView

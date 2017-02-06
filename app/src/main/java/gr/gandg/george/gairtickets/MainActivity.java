@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -26,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     String amadeusKey;
     String iataCodesKey;
 
+    private static final String[] COUNTRIES = new String[] {
+            "Belgium", "France", "Italy", "Germany", "Spain"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mainTextView =  (TextView)findViewById(R.id.main_textview);
@@ -46,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         airport.execute();
         //AirportParser airport = new AirportParser(amadeusKey);
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+
+        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete_from_airport);
+        textView.setAdapter(adapter);
 
     }
 

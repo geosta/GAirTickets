@@ -20,7 +20,7 @@ import static java.security.AccessController.getContext;
  * Created by george on 1/2/2017.
  */
 
-public class AirlineParser extends AsyncTask<String, Void, Void> {
+public class AirlineParser extends AsyncTask<String, Void, String> {
 
     public final String LOG_TAG = "AirlineParser";
     public String airlineSearchString = null;
@@ -37,7 +37,7 @@ public class AirlineParser extends AsyncTask<String, Void, Void> {
 
 
     @Override
-    protected Void doInBackground(String... params) {
+    protected String doInBackground(String... params) {
         airlineSearchString = params[0];
 
         if (airlineSearchString == null) {
@@ -85,7 +85,7 @@ public class AirlineParser extends AsyncTask<String, Void, Void> {
             }
             airportJsonStr = buffer.toString();
 
-            theTextView.setText(theTextView.getText() + "\n" + airportJsonStr);
+            return airportJsonStr;
 
 
         } catch (IOException e) {
@@ -110,5 +110,9 @@ public class AirlineParser extends AsyncTask<String, Void, Void> {
         return null;
     }
 
-
+    @Override
+    protected void onPostExecute(String result) {
+//        super.onPostExecute(result);
+        theTextView.setText(theTextView.getText() + "\n" + result);
+    }
 }

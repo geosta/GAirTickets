@@ -37,7 +37,7 @@ public class Itinerary implements Serializable {
             if (allAirlines.indexOf("," + f.marketingAirline + ",")==0) {
                 allAirlines += "," + f.marketingAirline + ",";
             }
-            txt.append("Operationg Airline: " + f.operatingAirline + "\n");
+            txt.append("Operationg Airline: =" + f.operatingAirline + "=\n");
             if (allAirlines.indexOf(",=" + f.operatingAirline + "=,")==0) {
                 allAirlines += "," + f.operatingAirline + ",";
             }

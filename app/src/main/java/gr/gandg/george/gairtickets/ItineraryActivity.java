@@ -34,7 +34,7 @@ public class ItineraryActivity extends AppCompatActivity {
         itineraryTextView = (TextView) findViewById(R.id.itinerary_textview);
         theItinerary = getIntent().getStringExtra("theItinerary");
         displayResults();
-        //(new AirlineParser()).execute(getIntent().getStringExtra("allAirlines"));
+        (new AirlineParser()).execute(getIntent().getStringExtra("allAirlines"));
     }
 
     private void displayResults() {

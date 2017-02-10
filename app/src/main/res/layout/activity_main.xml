@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,10 +8,128 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="gr.gandg.george.gairtickets.MainActivity">
+    android:orientation="vertical"
+    tools:context="gr.gandg.george.gairtickets.MainActivity"
+    android:background="@android:color/holo_blue_light">
 
-    <TextView
+    <!-- ####### ΑΕΡΟΔΡΟΜΙΑ ΑΝΑΧΩΡΗΣΗΣ / ΠΡΟΟΡΙΣΜΟΥ ####### -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:background="@android:color/white"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/from_airport_textview"
+            android:layout_weight="1"
+            android:hint="Από"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/to_airport_textview"
+            android:layout_weight="1"
+            android:hint="Προς"/>
+
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="5dp"/>
+
+    <!--- ##### ΕΠΙΛΟΓΗ ΑΠΛΟ / ΜΕ ΕΠΙΣΤΡΟΦΗ #### -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:background="@android:color/white"
+        android:padding="5dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/flight_type_radiogroup">
+
+            <RadioButton
+                android:text="Με επιστροφή"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/aleretoure_radiobutton"
+                android:layout_weight="1"
+                android:checked="true"/>
+
+            <RadioButton
+                android:text="Απλό"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/oneway_radiobutton"
+                android:layout_weight="1" />
+        </RadioGroup>
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="5dp"/>
+
+    <!-- ### ΗΜΕΡΟΜΗΝΙΕΣ ΑΝΑΧΩΡΗΣΗΣ - ΕΠΙΣΤΡΟΦΗΣ -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:background="@android:color/white"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ημερομηνία Αναχώρησης"
+            android:id="@+id/depature_date_textview"
+            android:onClick="selectDate"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ημερομηνία Επιστροφής"
+            android:id="@+id/return_date_textview"
+            android:onClick="selectDate"
+            android:padding="5dp" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="5dp"/>
+
+    <!-- ####  ΕΠΙΒΑΤΕΣ ##-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:background="@android:color/white"
+        android:padding="5dp">
+
+        <!-- ΕΝΗΛΙΚΕΣ -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="3"
+            android:background="@android:color/white"
+            android:padding="5dp">
+
+        </LinearLayout>
+
+        <!-- ΠΑΙΔΙΑ -->
+
+        <!-- ΒΡΕΦΗ -->
+
+    </LinearLayout>
+</LinearLayout>

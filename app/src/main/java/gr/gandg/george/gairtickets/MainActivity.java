@@ -2,6 +2,7 @@ package gr.gandg.george.gairtickets;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.RadioGroup;
 
 /**
  * UOM Mobile Development 2017 project
@@ -19,6 +20,17 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RadioGroup flightTypeRadiogroup = (RadioGroup)findViewById(R.id.flight_type_radiogroup);
+        flightTypeRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                switch (checkedId) {
+                    case R.id.aleretoure_radiobutton:
+                        break;
+                }
+            }
+        });
     }
 
     private void main_from() {

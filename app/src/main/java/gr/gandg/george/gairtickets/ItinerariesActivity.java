@@ -1,13 +1,22 @@
 package gr.gandg.george.gairtickets;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -21,6 +30,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ItinerariesActivity extends AppCompatActivity {
     String amadeusKey;
@@ -28,6 +38,7 @@ public class ItinerariesActivity extends AppCompatActivity {
     private ListView resultsListView;
     private ArrayAdapter<String> mItineraryAdapter;
     private ArrayList<String> itineraryResults = new ArrayList<String>();
+    private ArrayList<Itinerary> itineraryResultsObjects = new ArrayList<Itinerary>();
     private ProgressDialog progressDialog;
 
     @Override
@@ -40,14 +51,29 @@ public class ItinerariesActivity extends AppCompatActivity {
 
         mItineraryAdapter = new ArrayAdapter<String>(this,
                 R.layout.itinerary_list_item, R.id.itinerary_listView, itineraryResults);
+
         resultsListView.setAdapter(mItineraryAdapter);
 
         progressDialog = ProgressDialog.show(this, "GAirTickets", "Αναζήτηση πτήσεων...", true);
 
         (new FlightsParser()).execute();
+
+        resultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final Itinerary theItinerary = itineraryResultsObjects.get(i);
+                selectItinerary(theItinerary);
+            }
+        });
+
     }
 
-
+    public void selectItinerary(Itinerary theItinerary) {
+        Intent itineraryItent = new Intent();
+        itineraryItent.setClass(this, ItineraryActivity.class);
+        itineraryItent.putExtra("theItinerary", theItinerary.detailView());
+        startActivity(itineraryItent);
+    }
 
     private class FlightsParser extends AsyncTask<String, Void, ArrayList<Itinerary>> {
 
@@ -237,10 +263,13 @@ public class ItinerariesActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<Itinerary> result) {
 
             if (result == null) {
+                itineraryResultsObjects.clear();
+                itineraryResults.clear();
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Κανένα Αποτέλεσμα!",Toast.LENGTH_LONG).show();
                 finish();
             } else {
+                itineraryResultsObjects = result;
                 itineraryResults.clear();
                 if (result != null) {
                     for (int i = 0; i < result.size(); i++) {

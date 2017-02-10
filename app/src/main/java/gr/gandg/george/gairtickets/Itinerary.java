@@ -1,12 +1,13 @@
 package gr.gandg.george.gairtickets;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by george on 1/2/2017.
  */
 
-public class Itinerary {
+public class Itinerary implements Serializable {
     public ArrayList<Flight> outbound = new ArrayList<Flight>();
     public ArrayList<Flight> inbound = new ArrayList<Flight>();
 
@@ -17,9 +18,60 @@ public class Itinerary {
     public boolean refundable;
     public boolean changePenalties;
 
+    public String detailView() {
+        StringBuilder txt = new StringBuilder("");
+        Itinerary it = this;
+        txt.append("Αναχώρηση: \n");
+        for (int j=0; j<it.outbound.size(); j++) {
+            Flight f = it.outbound.get(j);
+            txt.append(f.departsAt);
+            txt.append(" ");
+            txt.append(f.originAirport);
+            txt.append("->");
+            txt.append(f.arrivesAt);
+            txt.append(" ");
+            txt.append(f.destinationAirport);
+            txt.append(" \n");
+            txt.append("Marketing Airline: " + f.marketingAirline + "\n");
+            txt.append("Operationg Airline: " + f.operatingAirline + "\n");
+            txt.append("Flight No: " + f.flightNumber + " - Aircraft: " + f.aircraft +  "\n");
+            txt.append("Travel Class: " + f.travelClass + "\n");
+            txt.append("Booking code: " + f.bookingCode + "  - Seats remaining: " + f.seatsRemaining + "\n");
+
+        }
+        if (it.inbound.size()>0) {
+            txt.append("\n\nΕπιστροφή: \n");
+            for (int j = 0; j < it.inbound.size(); j++) {
+                Flight f = it.inbound.get(j);
+                txt.append(f.departsAt);
+                txt.append(" ");
+                txt.append(f.originAirport);
+                txt.append("->");
+                txt.append(f.arrivesAt);
+                txt.append(" ");
+                txt.append(f.destinationAirport);
+                txt.append(" ");
+                txt.append(f.marketingAirline + "\n");
+                txt.append("Marketing Airline: " + f.marketingAirline + "\n");
+                txt.append("Operationg Airline: " + f.operatingAirline + "\n");
+                txt.append("Flight No: " + f.flightNumber + " - Aircraft: " + f.aircraft +  "\n");
+                txt.append("Travel Class: " + f.travelClass + "\n");
+                txt.append("Booking code: " + f.bookingCode + "  - Seats remaining: " + f.seatsRemaining + "\n");
+
+            }
+        }
+        txt.append("\n\nΤιμή: ");
+        txt.append(it.totalPrice);
+        txt.append("\n");
+        txt.append("Επιστροφή χρημάτων: " + (refundable ? "ναι" : "οχι") + "\n");
+        txt.append("Χρέωση αλλαγής: " + (changePenalties ? "ναι" : "οχι") + "\n");
+
+        return txt.toString();
+    }
+
     @Override
     public String toString() {
-        StringBuffer txt = new StringBuffer("");
+        StringBuilder txt = new StringBuilder("");
         Itinerary it = this;
         txt.append("Αναχώρηση: \n");
         for (int j=0; j<it.outbound.size(); j++) {
@@ -53,6 +105,7 @@ public class Itinerary {
         txt.append("Τιμή: ");
         txt.append(it.totalPrice);
         txt.append("\n");
+
 
         return txt.toString();
     }

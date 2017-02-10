@@ -1,7 +1,9 @@
 package gr.gandg.george.gairtickets;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        restorePreferences();
+
         RadioGroup flightTypeRadiogroup = (RadioGroup)findViewById(R.id.flight_type_radiogroup);
         flightTypeRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -43,17 +47,40 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void restorePreferences() {
+        SharedPreferences preferences = getSharedPreferences("G_AIR_TICKETS", Context.MODE_PRIVATE);
+        if (preferences.contains("fromAirport"))
+            ((TextView)findViewById(R.id.from_airport_textview)).setText(preferences.getString("fromAirport",""));
+        if (preferences.contains("toAirport"))
+             ((TextView)findViewById(R.id.to_airport_textview)).setText(preferences.getString("toAirport",""));
+        if (preferences.contains("departureDate"))
+             ((TextView)findViewById(R.id.depature_date_textview)).setText(preferences.getString("departureDate",""));
+        if (preferences.contains("returnDate"))
+             ((TextView)findViewById(R.id.return_date_textview)).setText(preferences.getString("returnDate",""));
+        if (preferences.contains("adultsNo"))
+            ((TextView)findViewById(R.id.adults_textview)).setText(preferences.getString("adultsNo","1"));
+        if (preferences.contains("childrenNo"))
+            ((TextView)findViewById(R.id.children_textview)).setText(preferences.getString("childrenNo","0"));
+        if (preferences.contains("infantNo"))
+             ((TextView)findViewById(R.id.infants_textview)).setText(preferences.getString("infantNo","0"));
+
+    }
+
+
 
     public void searchFlights(View v) {
         Intent itinerariesIntent = new Intent();
         itinerariesIntent.setClass(this, ItinerariesActivity.class);
 
-        String fromAirport, toAirport;
+        String fromAirport, toAirport, fromAirportId, toAirportId;
         boolean aleretoure;
         String departureDate, returnDate;
         String adultsNo, childrenNo, infantNo;
         String travelClass;
         String nonStop;
+
+        SharedPreferences preferences = getSharedPreferences("G_AIR_TICKETS", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = preferences.edit();
 
         try {
 
@@ -79,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
             CheckBox nonstopCheckBox = (CheckBox)findViewById(R.id.nonstop_checkBox);
             nonStop = nonstopCheckBox.isChecked() ? "true" : "false";
 
-            fromAirport = fromAirport.substring(fromAirport.indexOf("[") + 1, fromAirport.indexOf("]"));
-            toAirport = toAirport.substring(toAirport.indexOf("[") + 1, toAirport.indexOf("]"));
-            itinerariesIntent.putExtra("fromAirport",fromAirport);
-            itinerariesIntent.putExtra("toAirport",toAirport);
+            fromAirportId = fromAirport.substring(fromAirport.indexOf("[") + 1, fromAirport.indexOf("]"));
+            toAirportId = toAirport.substring(toAirport.indexOf("[") + 1, toAirport.indexOf("]"));
+            itinerariesIntent.putExtra("fromAirport",fromAirportId);
+            itinerariesIntent.putExtra("toAirport",toAirportId);
             itinerariesIntent.putExtra("aleretoure",aleretoure);
             itinerariesIntent.putExtra("departureDate",departureDate);
             itinerariesIntent.putExtra("returnDate",returnDate);
@@ -91,6 +118,18 @@ public class MainActivity extends AppCompatActivity {
             itinerariesIntent.putExtra("infantNo",infantNo);
             itinerariesIntent.putExtra("travelClass",travelClass);
             itinerariesIntent.putExtra("nonStop",nonStop);
+
+            editor.putString("fromAirport",fromAirport);
+            editor.putString("toAirport",toAirport);
+            editor.putBoolean("aleretoure",aleretoure);
+            editor.putString("departureDate",departureDate);
+            editor.putString("returnDate",returnDate);
+            editor.putString("adultsNo",adultsNo);
+            editor.putString("childrenNo",childrenNo);
+            editor.putString("infantNo",infantNo);
+            editor.putString("travelClass",travelClass);
+            editor.putString("nonStop",nonStop);
+            editor.commit();
 
             startActivity(itinerariesIntent);
         } catch (Exception e) {

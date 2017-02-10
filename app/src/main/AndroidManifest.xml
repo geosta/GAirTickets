@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".SelectDateActivity" />
         <activity android:name=".SelectAirportActivity" />
-        <activity android:name=".ItinerariesActivity"></activity>
+        <activity android:name=".ItinerariesActivity" />
+        <activity android:name=".ItineraryActivity"></activity>
     </application>
 
 </manifest>

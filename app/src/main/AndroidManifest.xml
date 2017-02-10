@@ -17,7 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectDateActivity"></activity>
+        <activity android:name=".SelectDateActivity" />
+        <activity android:name=".SelectAirportActivity" />
+        <activity android:name=".ItinerariesActivity"></activity>
     </application>
 
 </manifest>

@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/from_airport_textview"
-            android:layout_weight="1"
+            android:onClick="selectAirport"
             android:hint="Από"
             android:layout_marginBottom="5dp" />
 
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/to_airport_textview"
-            android:layout_weight="1"
+            android:onClick="selectAirport"
             android:hint="Προς"
             android:layout_marginBottom="5dp" />
 
@@ -96,17 +96,19 @@
         android:padding="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ημερομηνία Αναχώρησης"
+            android:layout_weight="1"
+            android:text="Ημ/νία Αναχώρησης"
             android:id="@+id/depature_date_textview"
             android:onClick="selectDate"
             android:padding="5dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ημερομηνία Επιστροφής"
+            android:layout_weight="1"
+            android:text="Ημ/νία Επιστροφής"
             android:id="@+id/return_date_textview"
             android:onClick="selectDate"
             android:padding="5dp" />
@@ -127,10 +129,10 @@
 
         <!-- ΕΝΗΛΙΚΕΣ -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3"
             android:background="@android:color/white"
             android:padding="5dp">
             <TextView
@@ -148,10 +150,10 @@
 
         <!-- ΠΑΙΔΙΑ -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3"
             android:background="@android:color/white"
             android:padding="5dp">
             <TextView
@@ -168,10 +170,10 @@
         </LinearLayout>
         <!-- ΒΡΕΦΗ -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3"
             android:background="@android:color/white"
             android:padding="5dp">
             <TextView
@@ -258,7 +260,7 @@
             android:text="Non Stop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/checkBox" />
+            android:id="@+id/nonstop_checkBox" />
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
@@ -269,6 +271,7 @@
         android:text="Αναζήτηση Πτήσεων"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/search_flights_button" />
+        android:id="@+id/search_flights_button"
+        android:onClick="searchFlights"/>
 </LinearLayout>
 </ScrollView>

@@ -31,6 +31,7 @@ public class Itinerary {
             txt.append(f.arrivesAt);
             txt.append(" ");
             txt.append(f.destinationAirport);
+            txt.append(" ");
             txt.append(f.marketingAirline + "\n");
         }
         txt.append("Επιστροφή: \n");

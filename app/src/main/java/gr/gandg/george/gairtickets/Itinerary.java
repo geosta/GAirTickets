@@ -17,6 +17,7 @@ public class Itinerary implements Serializable {
     public double pricePerInfant;
     public boolean refundable;
     public boolean changePenalties;
+    public String allAirlines = "";
 
     public String detailView() {
         StringBuilder txt = new StringBuilder("");
@@ -32,8 +33,14 @@ public class Itinerary implements Serializable {
             txt.append(" ");
             txt.append(f.destinationAirport);
             txt.append(" \n");
-            txt.append("Marketing Airline: " + f.marketingAirline + "\n");
+            txt.append("Marketing Airline: =" + f.marketingAirline + "=\n");
+            if (allAirlines.indexOf("," + f.marketingAirline + ",")==0) {
+                allAirlines += "," + f.marketingAirline + ",";
+            }
             txt.append("Operationg Airline: " + f.operatingAirline + "\n");
+            if (allAirlines.indexOf(",=" + f.operatingAirline + "=,")==0) {
+                allAirlines += "," + f.operatingAirline + ",";
+            }
             txt.append("Flight No: " + f.flightNumber + " - Aircraft: " + f.aircraft +  "\n");
             txt.append("Travel Class: " + f.travelClass + "\n");
             txt.append("Booking code: " + f.bookingCode + "  - Seats remaining: " + f.seatsRemaining + "\n");
@@ -52,8 +59,14 @@ public class Itinerary implements Serializable {
                 txt.append(f.destinationAirport);
                 txt.append(" ");
                 txt.append(f.marketingAirline + "\n");
-                txt.append("Marketing Airline: " + f.marketingAirline + "\n");
-                txt.append("Operationg Airline: " + f.operatingAirline + "\n");
+                txt.append("Marketing Airline: =" + f.marketingAirline + "=\n");
+                if (allAirlines.indexOf("," + f.marketingAirline + ",")==0) {
+                    allAirlines += "," + f.marketingAirline + ",";
+                }
+                txt.append("Operationg Airline: =" + f.operatingAirline + "=\n");
+                if (allAirlines.indexOf("," + f.operatingAirline + ",")==0) {
+                    allAirlines += "," + f.operatingAirline + ",";
+                }
                 txt.append("Flight No: " + f.flightNumber + " - Aircraft: " + f.aircraft +  "\n");
                 txt.append("Travel Class: " + f.travelClass + "\n");
                 txt.append("Booking code: " + f.bookingCode + "  - Seats remaining: " + f.seatsRemaining + "\n");
@@ -65,6 +78,11 @@ public class Itinerary implements Serializable {
         txt.append("\n");
         txt.append("Επιστροφή χρημάτων: " + (refundable ? "ναι" : "οχι") + "\n");
         txt.append("Χρέωση αλλαγής: " + (changePenalties ? "ναι" : "οχι") + "\n");
+
+        allAirlines = allAirlines.replaceAll(",,,,,", ",");
+        allAirlines = allAirlines.replaceAll(",,,,", ",");
+        allAirlines = allAirlines.replaceAll(",,,", ",");
+        allAirlines = allAirlines.replaceAll(",,", ",");
 
         return txt.toString();
     }

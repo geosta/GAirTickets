@@ -72,6 +72,7 @@ public class ItinerariesActivity extends AppCompatActivity {
         Intent itineraryItent = new Intent();
         itineraryItent.setClass(this, ItineraryActivity.class);
         itineraryItent.putExtra("theItinerary", theItinerary.detailView());
+        itineraryItent.putExtra("allAirlines", theItinerary.allAirlines);
         startActivity(itineraryItent);
     }
 

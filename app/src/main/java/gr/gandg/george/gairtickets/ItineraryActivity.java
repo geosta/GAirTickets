@@ -26,7 +26,7 @@ public class ItineraryActivity extends AppCompatActivity {
         itineraryTextView.setText(dispText);
     }
 
-    public void bookNow(View v) {
+    public void bookFlight(View v) {
         Toast.makeText(this, "Booking completed successfully", Toast.LENGTH_LONG).show();
     }
 }

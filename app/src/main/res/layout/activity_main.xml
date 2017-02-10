@@ -26,14 +26,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/from_airport_textview"
             android:layout_weight="1"
-            android:hint="Από"/>
+            android:hint="Από"
+            android:layout_marginBottom="5dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/to_airport_textview"
             android:layout_weight="1"
-            android:hint="Προς"/>
+            android:hint="Προς"
+            android:layout_marginBottom="5dp" />
 
     </LinearLayout>
     <Space
@@ -109,9 +111,9 @@
 
     <!-- ####  ΕΠΙΒΑΤΕΣ ##-->
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:weightSum="3"
         android:background="@android:color/white"
         android:padding="5dp">
@@ -120,16 +122,145 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="3"
             android:background="@android:color/white"
             android:padding="5dp">
-
+            <TextView
+                android:text="Ενήλικες:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/adults_textview"
+                android:inputType="number"
+                android:text="1"/>
         </LinearLayout>
 
         <!-- ΠΑΙΔΙΑ -->
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:background="@android:color/white"
+            android:padding="5dp">
+            <TextView
+                android:text="Παιδιά:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/children_textview"
+                android:inputType="number"
+                android:text="0"/>
+        </LinearLayout>
         <!-- ΒΡΕΦΗ -->
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:background="@android:color/white"
+            android:padding="5dp">
+            <TextView
+                android:text="Βρέφη:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/infants_textview"
+                android:inputType="number"
+                android:text="0"/>
+        </LinearLayout>
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="5dp"/>
+
+
+    <!--- ######## ΤΥΠΟΣ ΘΕΣΗΣ (ΚΛΑΣΗ) ######## -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:background="@android:color/white"
+        android:padding="5dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/travel_class_radiogroup">
+
+            <RadioButton
+                android:text="ECONOMY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/travel_class_economy_radiobutton"
+                android:layout_weight="1"
+                android:checked="true"/>
+
+            <RadioButton
+                android:text="PREMIUM_ECONOMY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/travel_class_premium_economy_radiobutton"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:text="BUSINESS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/travel_class_business_radiobutton"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:text="FIRST"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/travel_class_first_radiobutton"
+                android:layout_weight="1" />
+        </RadioGroup>
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="5dp"/>
+
+
+
+    <!-- #### NON STOP ONLY ### -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:background="@android:color/white"
+        android:padding="5dp">
+        <CheckBox
+            android:text="Non Stop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="10dp"/>
+
+    <Button
+        android:text="Αναζήτηση Πτήσεων"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_flights_button" />
 </LinearLayout>

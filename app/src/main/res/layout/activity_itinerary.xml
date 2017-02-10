@@ -19,13 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/itinerary_textview"
-   />
+        android:background="@android:color/white" />
 
     <Button
         android:text="Book Now!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button" />
+        android:id="@+id/button"
+        android:onClick="bookFlight" />
 
 </LinearLayout>
 </ScrollView>

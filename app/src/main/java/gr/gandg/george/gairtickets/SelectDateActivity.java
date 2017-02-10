@@ -17,10 +17,17 @@ public class SelectDateActivity extends AppCompatActivity {
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int i, int i1, int i2) {
-                selectDate("" + i + "-" + (i1+1) + "-" + i2 );
+                selectDate("" + i + "-" + in2digits((i1+1)) + "-" + in2digits(i2) );
             }
         });
 
+    }
+
+    private String in2digits(int i) {
+        if (i<=9)
+            return "0" + i;
+        else
+            return "" + i;
     }
 
     public void selectDate(String theDate) {

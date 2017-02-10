@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * UOM Mobile Development 2017 project
@@ -54,37 +55,47 @@ public class MainActivity extends AppCompatActivity {
         String travelClass;
         String nonStop;
 
-        fromAirport = ((TextView)findViewById(R.id.from_airport_textview)).getText().toString();
-        toAirport = ((TextView)findViewById(R.id.to_airport_textview)).getText().toString();
-        RadioButton aleretoure_radiobutton =  (RadioButton)findViewById(R.id.aleretoure_radiobutton);
-        aleretoure = aleretoure_radiobutton.isChecked() ? true : false;
-        departureDate = ((TextView)findViewById(R.id.depature_date_textview)).getText().toString();
-        returnDate = ((TextView)findViewById(R.id.return_date_textview)).getText().toString();
-        adultsNo = ((TextView)findViewById(R.id.adults_textview)).getText().toString();
-        childrenNo = ((TextView)findViewById(R.id.children_textview)).getText().toString();
-        infantNo = ((TextView)findViewById(R.id.infants_textview)).getText().toString();
+        try {
 
-        RadioGroup travelClassRadioGroup = (RadioGroup)findViewById(R.id.travel_class_radiogroup);
-        travelClass = ((RadioButton)findViewById(travelClassRadioGroup.getCheckedRadioButtonId())).getText().toString();
+            fromAirport = ((TextView)findViewById(R.id.from_airport_textview)).getText().toString();
+            toAirport = ((TextView)findViewById(R.id.to_airport_textview)).getText().toString();
+            RadioButton aleretoure_radiobutton =  (RadioButton)findViewById(R.id.aleretoure_radiobutton);
+            aleretoure = aleretoure_radiobutton.isChecked() ? true : false;
+            departureDate = ((TextView)findViewById(R.id.depature_date_textview)).getText().toString();
+            returnDate = ((TextView)findViewById(R.id.return_date_textview)).getText().toString();
+            adultsNo = ((TextView)findViewById(R.id.adults_textview)).getText().toString();
+            childrenNo = ((TextView)findViewById(R.id.children_textview)).getText().toString();
+            infantNo = ((TextView)findViewById(R.id.infants_textview)).getText().toString();
 
-        CheckBox nonstopCheckBox = (CheckBox)findViewById(R.id.nonstop_checkBox);
-        nonStop = nonstopCheckBox.isChecked() ? "true" : "false";
+            if (fromAirport.length()==0 || toAirport.length()==0 || departureDate.length()==0 ||
+                    (aleretoure && returnDate.length()==0)) {
+                Toast.makeText(this, "Συμπληρώστε τα στοιχεία...", Toast.LENGTH_LONG).show();
+                return;
+            }
 
-        fromAirport = fromAirport.substring(fromAirport.indexOf("[") + 1, fromAirport.indexOf("]"));
-        toAirport = toAirport.substring(toAirport.indexOf("[") + 1, toAirport.indexOf("]"));
-        itinerariesIntent.putExtra("fromAirport",fromAirport);
-        itinerariesIntent.putExtra("toAirport",toAirport);
-        itinerariesIntent.putExtra("aleretoure",aleretoure);
-        itinerariesIntent.putExtra("departureDate",departureDate);
-        itinerariesIntent.putExtra("returnDate",returnDate);
-        itinerariesIntent.putExtra("adultsNo",adultsNo);
-        itinerariesIntent.putExtra("childrenNo",childrenNo);
-        itinerariesIntent.putExtra("infantNo",infantNo);
-        itinerariesIntent.putExtra("travelClass",travelClass);
-        itinerariesIntent.putExtra("nonStop",nonStop);
+            RadioGroup travelClassRadioGroup = (RadioGroup)findViewById(R.id.travel_class_radiogroup);
+            travelClass = ((RadioButton)findViewById(travelClassRadioGroup.getCheckedRadioButtonId())).getText().toString();
 
+            CheckBox nonstopCheckBox = (CheckBox)findViewById(R.id.nonstop_checkBox);
+            nonStop = nonstopCheckBox.isChecked() ? "true" : "false";
 
-        startActivity(itinerariesIntent);
+            fromAirport = fromAirport.substring(fromAirport.indexOf("[") + 1, fromAirport.indexOf("]"));
+            toAirport = toAirport.substring(toAirport.indexOf("[") + 1, toAirport.indexOf("]"));
+            itinerariesIntent.putExtra("fromAirport",fromAirport);
+            itinerariesIntent.putExtra("toAirport",toAirport);
+            itinerariesIntent.putExtra("aleretoure",aleretoure);
+            itinerariesIntent.putExtra("departureDate",departureDate);
+            itinerariesIntent.putExtra("returnDate",returnDate);
+            itinerariesIntent.putExtra("adultsNo",adultsNo);
+            itinerariesIntent.putExtra("childrenNo",childrenNo);
+            itinerariesIntent.putExtra("infantNo",infantNo);
+            itinerariesIntent.putExtra("travelClass",travelClass);
+            itinerariesIntent.putExtra("nonStop",nonStop);
+
+            startActivity(itinerariesIntent);
+        } catch (Exception e) {
+            Toast.makeText(this, "Συμπληρώστε τα στοιχεία...", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void selectDate(View v) {

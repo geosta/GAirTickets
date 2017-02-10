@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,7 +67,7 @@ public class ItinerariesActivity extends AppCompatActivity {
             String travelClass = in.getStringExtra("travelClass");
             String nonStop = in.getStringExtra("nonStop");
 
-            StringBuffer sUrl = new StringBuffer("");
+            StringBuilder sUrl = new StringBuilder("");
             sUrl.append("http://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=");
             sUrl.append(amadeusKey);
             sUrl.append("&origin=");
@@ -157,6 +158,9 @@ public class ItinerariesActivity extends AppCompatActivity {
          * Parses the Json Result to an ArrayList of Itinerary objects
          */
         private ArrayList<Itinerary> parseJson(String json) {
+            if (json == null) {
+                return null;
+            }
             ArrayList<Itinerary>results = new ArrayList<Itinerary>();
             try {
                 JSONObject amadeusResponse = new JSONObject(json);
@@ -190,28 +194,30 @@ public class ItinerariesActivity extends AppCompatActivity {
 
 
 // --- inbound
+                    if (  amadeusItineraries.getJSONObject(0).has("inbound")) {
 
-                    JSONObject amadeusInbound = amadeusItineraries.getJSONObject(0).getJSONObject("inbound");
-                    JSONArray amadeusIboundFlights = amadeusOutbound.getJSONArray("flights");
+                        JSONObject amadeusInbound = amadeusItineraries.getJSONObject(0).getJSONObject("inbound");
 
-                    // inbound flights
-                    for (int j=0; j<amadeusIboundFlights.length(); j++) {
-                        JSONObject amadeusFlight = amadeusOutboundFlights.getJSONObject(j);
-                        Flight flight = new Flight();
-                        flight.departsAt = amadeusFlight.getString("departs_at");
-                        flight.arrivesAt = amadeusFlight.getString("arrives_at");
-                        flight.originAirport = amadeusFlight.getJSONObject("origin").getString("airport");
-                        flight.destinationAirport = amadeusFlight.getJSONObject("destination").getString("airport");
-                        flight.marketingAirline = amadeusFlight.getString("marketing_airline");
-                        flight.operatingAirline = amadeusFlight.getString("operating_airline");
-                        flight.flightNumber = amadeusFlight.getString("flight_number");
-                        flight.aircraft = amadeusFlight.getString("aircraft");
-                        flight.travelClass = amadeusFlight.getJSONObject("booking_info").getString("travel_class");
-                        flight.bookingCode = amadeusFlight.getJSONObject("booking_info").getString("booking_code");
-                        flight.seatsRemaining = amadeusFlight.getJSONObject("booking_info").getInt("seats_remaining");
-                        itinerary.inbound.add(flight);
+                        JSONArray amadeusIboundFlights = amadeusOutbound.getJSONArray("flights");
+
+                        // inbound flights
+                        for (int j = 0; j < amadeusIboundFlights.length(); j++) {
+                            JSONObject amadeusFlight = amadeusOutboundFlights.getJSONObject(j);
+                            Flight flight = new Flight();
+                            flight.departsAt = amadeusFlight.getString("departs_at");
+                            flight.arrivesAt = amadeusFlight.getString("arrives_at");
+                            flight.originAirport = amadeusFlight.getJSONObject("origin").getString("airport");
+                            flight.destinationAirport = amadeusFlight.getJSONObject("destination").getString("airport");
+                            flight.marketingAirline = amadeusFlight.getString("marketing_airline");
+                            flight.operatingAirline = amadeusFlight.getString("operating_airline");
+                            flight.flightNumber = amadeusFlight.getString("flight_number");
+                            flight.aircraft = amadeusFlight.getString("aircraft");
+                            flight.travelClass = amadeusFlight.getJSONObject("booking_info").getString("travel_class");
+                            flight.bookingCode = amadeusFlight.getJSONObject("booking_info").getString("booking_code");
+                            flight.seatsRemaining = amadeusFlight.getJSONObject("booking_info").getInt("seats_remaining");
+                            itinerary.inbound.add(flight);
+                        }
                     }
-
                     JSONObject amadeusFare = amadeusResult.getJSONObject("fare");
                     itinerary.totalPrice = amadeusFare.getDouble("total_price");
                     itinerary.refundable = amadeusFare.getJSONObject("restrictions").getBoolean("refundable");
@@ -230,15 +236,21 @@ public class ItinerariesActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Itinerary> result) {
 
-            itineraryResults.clear();
-            if (result != null) {
-                for (int i = 0; i < result.size(); i++) {
-                    Itinerary it = result.get(i);
-                    itineraryResults.add(it.toString());
+            if (result == null) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Κανένα Αποτέλεσμα!",Toast.LENGTH_LONG).show();
+                finish();
+            } else {
+                itineraryResults.clear();
+                if (result != null) {
+                    for (int i = 0; i < result.size(); i++) {
+                        Itinerary it = result.get(i);
+                        itineraryResults.add(it.toString());
+                    }
+                    mItineraryAdapter.notifyDataSetChanged();
                 }
-                mItineraryAdapter.notifyDataSetChanged();
+                progressDialog.dismiss();
             }
-            progressDialog.dismiss();
         }
     }
 

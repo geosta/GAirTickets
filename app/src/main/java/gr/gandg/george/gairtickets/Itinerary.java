@@ -34,19 +34,21 @@ public class Itinerary {
             txt.append(" ");
             txt.append(f.marketingAirline + "\n");
         }
-        txt.append("Επιστροφή: \n");
-        for (int j=0; j<it.inbound.size(); j++) {
-            Flight f = it.inbound.get(j);
-            txt.append(f.departsAt);
-            txt.append(" ");
-            txt.append(f.originAirport);
-            txt.append("->");
-            txt.append(f.arrivesAt);
-            txt.append(" ");
-            txt.append(f.destinationAirport);
-            txt.append(" ");
-            txt.append(f.marketingAirline + "\n");
+        if (it.inbound.size()>0) {
+            txt.append("Επιστροφή: \n");
+            for (int j = 0; j < it.inbound.size(); j++) {
+                Flight f = it.inbound.get(j);
+                txt.append(f.departsAt);
+                txt.append(" ");
+                txt.append(f.originAirport);
+                txt.append("->");
+                txt.append(f.arrivesAt);
+                txt.append(" ");
+                txt.append(f.destinationAirport);
+                txt.append(" ");
+                txt.append(f.marketingAirline + "\n");
 
+            }
         }
         txt.append("Τιμή: ");
         txt.append(it.totalPrice);

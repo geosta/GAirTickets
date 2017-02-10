@@ -11,6 +11,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -74,7 +75,7 @@ public class ItineraryActivity extends AppCompatActivity {
             try {
 
                 String theURL = API_BASE_URL + "?api_key=" + API_KEY +
-                        "&code=\"" + URLEncoder.encode(airlineSearchString, "UTF-8") + "\"";
+                        "&code=" + airlineSearchString ;
                 Log.i(LOG_TAG, theURL);
                 URL url = new URL(theURL);
 
@@ -153,7 +154,12 @@ public class ItineraryActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+            TextView tv = ((TextView)findViewById(R.id.itinerary_textview));
+            String theResult = tv.getText().toString();
+            for (int i=0; i<airlineCodes.size(); i++) {
+                theResult = theResult.replace("=" + airlineCodes.get(i).toString() + "=", airlineNames.get(i).toString());
+            }
+            tv.setText(theResult);
         }
     }
 

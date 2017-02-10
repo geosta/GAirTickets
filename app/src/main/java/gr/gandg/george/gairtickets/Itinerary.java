@@ -34,11 +34,11 @@ public class Itinerary implements Serializable {
             txt.append(f.destinationAirport);
             txt.append(" \n");
             txt.append("Marketing Airline: =" + f.marketingAirline + "=\n");
-            if (allAirlines.indexOf("," + f.marketingAirline + ",")==0) {
+            if (allAirlines.indexOf("," + f.marketingAirline + ",")==-1) {
                 allAirlines += "," + f.marketingAirline + ",";
             }
             txt.append("Operationg Airline: =" + f.operatingAirline + "=\n");
-            if (allAirlines.indexOf(",=" + f.operatingAirline + "=,")==0) {
+            if (allAirlines.indexOf("," + f.operatingAirline + ",")==-1) {
                 allAirlines += "," + f.operatingAirline + ",";
             }
             txt.append("Flight No: " + f.flightNumber + " - Aircraft: " + f.aircraft +  "\n");
@@ -60,11 +60,11 @@ public class Itinerary implements Serializable {
                 txt.append(" ");
                 txt.append(f.marketingAirline + "\n");
                 txt.append("Marketing Airline: =" + f.marketingAirline + "=\n");
-                if (allAirlines.indexOf("," + f.marketingAirline + ",")==0) {
+                if (allAirlines.indexOf("," + f.marketingAirline + ",")==-1) {
                     allAirlines += "," + f.marketingAirline + ",";
                 }
                 txt.append("Operationg Airline: =" + f.operatingAirline + "=\n");
-                if (allAirlines.indexOf("," + f.operatingAirline + ",")==0) {
+                if (allAirlines.indexOf("," + f.operatingAirline + ",")==-1) {
                     allAirlines += "," + f.operatingAirline + ",";
                 }
                 txt.append("Flight No: " + f.flightNumber + " - Aircraft: " + f.aircraft +  "\n");
@@ -83,6 +83,8 @@ public class Itinerary implements Serializable {
         allAirlines = allAirlines.replaceAll(",,,,", ",");
         allAirlines = allAirlines.replaceAll(",,,", ",");
         allAirlines = allAirlines.replaceAll(",,", ",");
+        if (allAirlines.startsWith(",")) allAirlines = allAirlines.substring(1);
+        if (allAirlines.endsWith(",")) allAirlines = allAirlines.substring(0, allAirlines.length()-1);
 
         return txt.toString();
     }
@@ -102,7 +104,7 @@ public class Itinerary implements Serializable {
             txt.append(" ");
             txt.append(f.destinationAirport);
             txt.append(" ");
-            txt.append(f.marketingAirline + "\n");
+            txt.append(f.operatingAirline + "\n");
         }
         if (it.inbound.size()>0) {
             txt.append("Επιστροφή: \n");
@@ -116,7 +118,7 @@ public class Itinerary implements Serializable {
                 txt.append(" ");
                 txt.append(f.destinationAirport);
                 txt.append(" ");
-                txt.append(f.marketingAirline + "\n");
+                txt.append(f.operatingAirline + "\n");
 
             }
         }

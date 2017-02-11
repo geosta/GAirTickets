@@ -18,3 +18,10 @@ With complete flight search functionality.
 With compact flight details display in the list view to choose the one we want.
 
 With detail flight details view, with airline name, airports, times, booking details, free seats, total cost, penalties and refound policy.
+
+
+Itinerary class encapsulates all the details of an Itinerary (one way or roundtrip) result.
+
+Activity layout enclosed in ScrollView to enable scrolling in landscape mode.
+
+With only one call to IATACodes api for as many airlines as we need.

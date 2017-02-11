@@ -5,11 +5,11 @@ Android Project for UOM Mobile Development
 
 Uses :
 
---- Amadeus Api ----
+--- Amadeus Api ---
 For airport name autocomplete.
 For flights results
 
----- IataCode Api ---
+--- IataCode Api ---
 For retriving the Airline company name from its IATA code.
 
 

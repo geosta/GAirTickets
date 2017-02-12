@@ -88,9 +88,9 @@ public class ItinerariesActivity extends AppCompatActivity {
             String departure_date = in.getStringExtra("departureDate");
             Boolean aleretoure = in.getBooleanExtra("aleretoure", true);
             String return_date = aleretoure ? in.getStringExtra("returnDate"): "";
-            int adults = in.getIntExtra("adultsNo", 1);
-            int children = in.getIntExtra("childrenNo", 0);
-            int infants =in.getIntExtra("infantNo", 0);
+            String adults = in.getStringExtra("adultsNo");
+            String children = in.getStringExtra("childrenNo");
+            String infants =in.getStringExtra("infantNo");
             String travelClass = in.getStringExtra("travelClass");
             String nonStop = in.getStringExtra("nonStop");
 

@@ -124,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
             editor.putBoolean("aleretoure",aleretoure);
             editor.putString("departureDate",departureDate);
             editor.putString("returnDate",returnDate);
-            editor.putString("adultsNo",adultsNo);
+            editor.putString("adultsNo", adultsNo);
             editor.putString("childrenNo",childrenNo);
-            editor.putString("infantNo",infantNo);
+            editor.putString("infantNo", infantNo);
             editor.putString("travelClass",travelClass);
             editor.putString("nonStop",nonStop);
             editor.commit();
